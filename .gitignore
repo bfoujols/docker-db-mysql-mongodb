@@ -1,0 +1,7 @@
+### JetBrains template
+.idea/**
+
+### Docker data mysql
+dbdata/**
+mongodata/**
+

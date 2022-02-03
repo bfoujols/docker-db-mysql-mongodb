@@ -1,0 +1,60 @@
+version: "3"
+services:
+  db:
+    container_name: mysql-ddmm
+    image: mysql:5.7
+    platform: linux/amd64
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: yoo
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: gosman
+      MYSQL_PASSWORD: yoo
+    volumes:
+      - ./dbdata:/var/lib/mysql
+  phpmyadmin:
+    container_name: pma-ddmm
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 1G
+      MEMORY_LIMIT: 512M
+      MAX_EXECUTION_TIME: 0
+    restart: always
+    links:
+      - db
+  dbmongo:
+      container_name: mongo-ddmm
+      image: mongo:4.0
+      platform: linux/amd64
+      ports:
+        - "2717:27017"
+      restart: always
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: yoo
+      volumes:
+        - ./mongodata:/data
+  mongo-express:
+    image: mongo-express
+    container_name: mexpress
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=yoo
+      - ME_CONFIG_MONGODB_URL=mongodb://root:yoo@dbmongo:27017/?authSource=admin
+      #- ME_CONFIG_BASICAUTH_USERNAME=yoo
+      #- ME_CONFIG_BASICAUTH_PASSWORD=yoo
+    links:
+      - dbmongo
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+volumes:
+  dbdata:
+  mongodata:
