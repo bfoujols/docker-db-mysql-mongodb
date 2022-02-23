@@ -54,19 +54,19 @@ $ vim docker-composer.yml
 ```
 3. Creation de l'environnement docker
 ```
-$ sudo docker-compose create
+$ docker-compose create
 ```
 4. Demarrer l'environnement docker
 ```
-$ sudo docker-compose start
+$ docker-compose start
 ```
 5. Stop l'environnement docker
 ```
-$ sudo docker-compose stop
+$ docker-compose stop
 ```
 6. Rebuild l'environnement docker
 ```
-$ sudo docker-compose rm
+$ docker-compose rm
 ```
 
 ---
