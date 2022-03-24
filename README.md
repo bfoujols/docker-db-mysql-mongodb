@@ -32,6 +32,13 @@ L'environnement de dev se repose sur [DOCKER](https://docker.com) /
 Login : root \
 Password : yoo
 /!\ Celui-ci peut être changer dans le fichier docker-compose
+
+### Import Datastore Mongodb
+
+```
+mongorestore --host="localhost:2717" --username=root --password=**** <DIR_EXPORT_DATA>
+```
+
 ---
 ### Installation "docker-compose" ###
 
